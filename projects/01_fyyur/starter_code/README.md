@@ -81,6 +81,13 @@ Instructions
   5. Implement search, powering the `/search` endpoints that serve the application's search functionalities.
   6. Serve venue and artist detail pages, powering the `<venue|artist>/<id>` endpoints that power the detail pages.
 
+def search_venues():
+def delete_venue(venue_id):
+def search_artists():
+def edit_artist(artist_id):
+def edit_artist_submission(artist_id):
+def edit_venue(venue_id):
+def edit_venue_submission(venue_id):
 
 Acceptance Criteria
 -----
