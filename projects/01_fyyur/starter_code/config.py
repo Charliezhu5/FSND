@@ -13,3 +13,6 @@ SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:toor@localhost:5432/fyyur'
 
 # Disable Warning
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# Change templates on the fly
+TEMPLATES_AUTO_RELOAD = True
