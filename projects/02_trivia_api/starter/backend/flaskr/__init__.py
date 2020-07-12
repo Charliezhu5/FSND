@@ -67,15 +67,17 @@ def create_app(test_config=None):
             num_questions = len(selection)
             questions = paginate_questions(request, selection)
             categories = {category.id: category.type for category in Category.query.all()}
+            currentCategory = [question["category"] for question in questions]
 
             return jsonify({
                 'questions': questions,
                 'total_questions': num_questions,
                 'categories': categories,
-                'currentCategory': None
+                'currentCategory': currentCategory  # a list of category for each question in this pagination.
             })
 
-        except:
+        except Exception as e: 
+            print(e)
             abort(422)
 
     '''
@@ -100,13 +102,15 @@ def create_app(test_config=None):
             categories = {category.id: category.type for category in Category.query.all()}
 
             return jsonify({
+                'question_id': question_id,
                 'questions': questions,
                 'total_questions': num_questions,
                 'categories': categories,
                 'currentCategory': None
             })
         
-        except:
+        except Exception as e: 
+            print(e)
             abort(422)
 
     '''
@@ -141,14 +145,20 @@ def create_app(test_config=None):
             abort(400)
 
         try:
-            question= Question(question=new_question, answer=new_answer, category=new_category,difficulty=new_difficulty)
+            question= Question(
+                question=new_question, 
+                answer=new_answer, 
+                category=new_category, 
+                difficulty=new_difficulty
+                )
             question.insert()
 
             return jsonify({
                 'success': True,
             })
 
-        except:
+        except Exception as e: 
+            print(e)
             abort(422)
     '''
     @TODO: Done
@@ -170,14 +180,16 @@ def create_app(test_config=None):
 
             num_questions = len(results)
             questions = paginate_questions(request, results)
+            currentCategory = [question["category"] for question in questions]
 
             return jsonify({
                 'questions': questions,
                 'total_questions': num_questions,
-                'currentCategory': None
+                'currentCategory': currentCategory
             })
         
-        except:
+        except Exception as e: 
+            print(e)
             abort(422)
     '''
     @TODO: Done
@@ -203,7 +215,8 @@ def create_app(test_config=None):
                 'currentCategory': currentCategory
             })
         
-        except:
+        except Exception as e: 
+            print(e)
             abort(422)
 
     '''
@@ -221,35 +234,39 @@ def create_app(test_config=None):
     def quiz():
         try:
             body = request.get_json()
-            previous_questions = body.get('previous_questions') # ID sequence
-            quiz_category = body.get('quiz_category') # a dict containing ID
+            previous_questions = body.get('previous_questions')  # ID sequence
+            quiz_category = body.get('quiz_category')  # a dict containing ID
+            category_id = quiz_category["id"]
 
-            if quiz_category["id"] == 0:
+            if category_id == 0:
                 questions = Question.query.all()
             else:
-                questions = Question.query.filter(Question.category == quiz_category["id"]).all()
+                questions = Question.query.filter(
+                            Question.category == category_id
+                            ).all()
 
             question_pool = [question.id for question in questions]
             question_id = random.choice(question_pool)
-            
-            # Check if random selected id is available. Use while loop to eventually get one available id.
+
+            # While loop checks if random question is not repeated.
             if len(question_pool) > len(previous_questions):
                 while question_id in previous_questions:
                     question_id = random.choice(question_pool)
-                
+
                 question = Question.query.get(question_id)
 
                 return jsonify({
                     'success': True,
                     'question': question.format()
                 })
-            
+
             return jsonify({
                 'success': False,
                 'message': "Out of questions"
             })
-            
-        except:
+
+        except Exception as e: 
+            print(e)
             abort(422)
     '''
     @TODO: Done
