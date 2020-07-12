@@ -87,12 +87,12 @@ def create_app(test_config=None):
     '''
     @app.route('/questions/<int:question_id>', methods=['DELETE'])
     def delete_question(question_id):
+        question = Question.query.filter(Question.id == question_id).first()
+
+        if question is None:
+            abort(404)
+
         try:
-            question = Question.query.filter(Question.id == question_id).one_or_none()
-
-            if question is None:
-                abort(404)
-
             question.delete()
             selection = Question.query.order_by(Question.id).all()
             num_questions = len(selection)
@@ -231,8 +231,8 @@ def create_app(test_config=None):
 
             question_pool = [question.id for question in questions]
             question_id = random.choice(question_pool)
-
             
+            # Check if random selected id is available. Use while loop to eventually get one available id.
             if len(question_pool) > len(previous_questions):
                 while question_id in previous_questions:
                     question_id = random.choice(question_pool)
