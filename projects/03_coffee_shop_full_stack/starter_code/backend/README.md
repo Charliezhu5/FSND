@@ -51,6 +51,7 @@ The `--reload` flag will detect file changes and restart the server automaticall
 ## Tasks
 
 ### Setup Auth0
+https://github.com/jungleBadger/udacity_coffee_shop/blob/master/troubleshooting/generate_token.md
 
 1. Create a new Auth0 Account
 2. Select a unique tenant domain
@@ -77,9 +78,18 @@ The `--reload` flag will detect file changes and restart the server automaticall
     - Run the collection and correct any errors.
     - Export the collection overwriting the one we've included so that we have your proper JWTs during review!
 
+login:
+navigate to frontend, cmd run ionic serve, then web browser to localhost:8100
+
 ### Implement The Server
 
 There are `@TODO` comments throughout the `./backend/src`. We recommend tackling the files in order and from top to bottom:
 
 1. `./src/auth/auth.py`
 2. `./src/api.py`
+
+barista(@fsnd.com Kamisama) active jwt:
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InJuWHNsWDlGbnlHUlE2OU5sTnZTNiJ9.eyJpc3MiOiJodHRwczovL2Z1bGxjb3VudC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWYxNjVhM2MyYWQzMmMwMDEzNTAwYTMzIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiaWF0IjoxNTk1MzgzODQ0LCJleHAiOjE1OTU0NzAyNDQsImF6cCI6InJuUGN3N2k3NFA0NVR5eEc2VGlqN0xhaFQzaE5HejJ4Iiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.krHZhxjEpQ9BQ9ObYHTnzCa_wHruH0iNI9qJC8zdK7jKMypcsxQv_758ZHTHqswAI8lFgEvRYDQIa2-aybzvBspU8FKIwXd21Lr2_0baZB_YqWSfuhvYj_B0TYRYby9H1OiS85TzGmVIoto9iccKGlMyhZFiv9ZN7RDPq7ErQlzp4e7mnNzrve0mG3y7LKbleeF1EgzYCUqgtchhrhgEf02Z-9U4Q4U7T8quXFGVtLJOTTrLXjt51CslgHXiSe9BcvmYU5-wPiTMUB6qMAsu4_DEo1de6VdQMklhDKLTnGnr49dKD-ANiKugl10CJS7bRWd2FtXQN4u_8MHxge2FhA
+
+manager(@fsnd.com Kamisama) active jwt:
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InJuWHNsWDlGbnlHUlE2OU5sTnZTNiJ9.eyJpc3MiOiJodHRwczovL2Z1bGxjb3VudC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWYxNjU5ZDVkZTNiNTkwMDE5MjUwYzJjIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiaWF0IjoxNTk1MzgzODk5LCJleHAiOjE1OTU0NzAyOTksImF6cCI6InJuUGN3N2k3NFA0NVR5eEc2VGlqN0xhaFQzaE5HejJ4Iiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6ZHJpbmtzIiwiZ2V0OmRyaW5rcy1kZXRhaWwiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.b9z2hOfEjOCzcjCPX51VCTt5FVSIJtAuiWTTGgLEjXuVG08mYDiVWFcIvCpudiEouC00jG2sr6xknobz8NwyRfc2ERQJg4puEttMWWyIEaoP1SqhTMG-hOnxakRmm9D25BIQ5rNLoceSUk_9Yce1U2M5Zmfxp3nWEJo6vx8NI0bqUg6NAc6cC6Ba_DyGHV9A9yEBEwuLD2Gjk7DaihEACvClUm2sl3G5iaTuQiWRIEysrjCF82Egt4GCmWnk6wFYY7N6zc48rumn0B3lVYkr0Vj4izED_BDCOQqIb3Ydpt4VuQR-8CwMHjriU7XzG_tDcrrgoDq4SFFAIqbkCwKIiQ
